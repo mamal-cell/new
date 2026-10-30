@@ -4,7 +4,7 @@ Electruck is a professional automotive electrical-diagram workspace. The reposit
 
 ## Desktop prototype
 
-The desktop implementation is in `desktop/` and includes a Persian RTL workbench, project creation/search stored locally in the browser profile, local image/PDF selection, schematic demo, dark mode, browser speech output, and a scripted (not AI-backed) demo chat.
+The desktop implementation is in `desktop/` and includes a Persian RTL workbench, project creation/search stored locally, local image/PDF selection, schematic demo, dark mode, browser speech output, and a scripted (not AI-backed) demo chat.
 
 ### Run on a development computer
 
