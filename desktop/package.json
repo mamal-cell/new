@@ -1,0 +1,33 @@
+{
+  "name": "electruck-desktop",
+  "version": "0.1.0",
+  "description": "Electruck professional automotive electrical diagrams workspace",
+  "main": "main.cjs",
+  "author": "Electruck",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^42.11.16",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.electruck.desktop",
+    "productName": "Electruck",
+    "directories": { "output": "release" },
+    "files": ["main.cjs", "preload.cjs", "index.html", "style.css", "renderer.js"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "artifactName": "Electruck-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Electruck"
+    }
+  }
+}
