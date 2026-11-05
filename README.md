@@ -1,35 +1,37 @@
 # Electruck
 
-Electruck is a professional automotive electrical-diagram workspace. The repository currently contains two independent prototypes: a native Android starter and a Windows/macOS/Linux desktop shell built with Electron.
-
-## Desktop prototype
-
-The desktop implementation is in `desktop/` and includes a Persian RTL workbench, project creation/search stored locally, local image/PDF selection, schematic demo, dark mode, browser speech output, and a scripted (not AI-backed) demo chat.
-
-### Run on a development computer
-
-1. Install Node.js 20 or newer.
-2. Open a terminal in `desktop/` and run `npm install`.
-3. Run `npm start` to launch the desktop app.
-
-### Build the Windows installer
-
-On Windows, from `desktop/`, run `npm install` and then `npm run dist:win`. The installer is written to `desktop/release/Electruck-Setup-0.1.0.exe`. Building a Windows installer on Linux may require Wine and Windows signing is not configured. This repository does not currently contain a built installer.
+Electruck is a private, offline-first automotive wiring-diagram project archive. The Android starter now supports local vehicle projects, local image/PDF attachments, expert-entered codes and notes, and manual map verification. The separate desktop prototype is under `desktop/`.
 
 ## Android prototype
 
-Open the repository root in Android Studio, install JDK 17+ and Android SDK 35, sync Gradle, and run the `app` configuration. Android minimum version is API 26; application ID is `com.madarban.app`.
+Open the repository root in Android Studio with JDK 17+ and Android SDK 35 installed, sync Gradle, and run the `app` configuration on a real Android phone or emulator. Minimum Android version is API 26. The app declares no internet permission and disables Android cloud backup; its project metadata is stored in private app preferences on-device. Imported source files remain in the Android document provider selected by the owner, with a persisted read grant. Uninstalling the app or deleting/moving the source file can make project attachments unavailable, so keep originals backed up separately.
 
-## Current scope and limitations
+### Implemented in this first offline step
 
-These are prototypes, not a production-ready diagnostics product. Data in starter screens and the circuit illustration are examples. Local project entries are stored on the current computer; use the JSON export for a manual backup. Image files can be opened locally, but OCR, symbol recognition, real wiring simulation, vehicle-specific technical data, Google sign-in, cloud sync, user invitations, connected AI, and production speech workflows have not been implemented. The chat responses are scripted examples and must not be used as repair instructions. Never infer a fuse rating or wiring procedure from the illustrative diagram.
+- Persian RTL home, project archive, map workspace, and settings.
+- Create/search/open/delete vehicle projects; persist metadata across app restarts.
+- Attach a local image or PDF using Android's document picker.
+- View images with pinch zoom; PDF is opened in an installed PDF reader.
+- Manually enter/remove circuit codes and save notes.
+- Explicit expert-controlled verification checkbox; newly attached maps start unverified.
+- Light/dark preference saved on device.
 
-## Next engineering steps
+### Not implemented yet
 
-1. Define and validate the vehicle, diagram, circuit, annotation, and permission data model.
-2. Implement file import, OCR, and symbol recognition with expert review/correction.
-3. Add secure authentication and owner-controlled access through a backend.
-4. Add source-attributed technical references and an AI service behind a protected API.
-5. Add automated tests, signed release packaging, crash reporting, and update delivery.
+No OCR, automatic symbol/wire analysis, 3D simulation, verified diagram library, account/cloud sync, user registration, AI assistant, speech, or JSON export. The app does not ship vehicle-specific wiring information; only the vehicle/project facts entered by the owner are stored. The code and notes screen is a manual annotation starter, not a diagram editor overlay. No APK was built or runtime-tested here because Java and Android SDK are unavailable in this environment.
 
-Owner approval and project privacy should be enforced server-side before inviting ordinary users. Vehicle electrical work can cause injury or damage; product guidance must clearly state uncertainty and safety precautions.
+## Desktop prototype
+
+The Electron implementation in `desktop/` provides a Persian RTL desktop shell and local project UI. On a development machine with Node.js 20+:
+
+```sh
+cd desktop
+npm install
+npm start
+```
+
+To make the Windows NSIS installer on a Windows computer, run `npm run dist:win`; output is under `desktop/release/`. The repository does not currently contain a built installer.
+
+## Safety and next steps
+
+This is a starter, not a production diagnostics product. Verify every imported diagram against its source, vehicle model, year, trim, and system. Never treat a displayed sample or manually entered value as validated by the app. The next Android steps should be robust diagram metadata and backup/export, in-app PDF preview, annotation overlays, tests, then owner-approved OCR suggestions with review. Any future sharing/AI service must remain opt-in and preserve owner-controlled access.
